@@ -1,0 +1,2 @@
+module osmundf.document.board {
+}
