@@ -14,7 +14,7 @@ The Osmund Francis Document Board is a Spring Boot backend that facilitates filt
 
 ## License
 
-Copyright (c) 2023-2023 Osmund Francis
+Copyright (c) 2023-2024 Osmund Francis
 
 Licensed under the MIT License
 
