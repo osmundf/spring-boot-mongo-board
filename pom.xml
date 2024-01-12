@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.osmundf</groupId>
-	<artifactId>document-board</artifactId>
+	<artifactId>spring-boot-mongo-board</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
-	<name>osmundf.document.board</name>
-	<description>Osmund Francis Document Board</description>
+	<name>Spring Boot Mongo Board</name>
+	<description>Osmund Francis Mongo Board</description>
 	<url>https://github.com/osmundf/spring-boot-mongo-board</url>
 
 	<properties>
@@ -24,34 +24,27 @@
 
 		<!-- Settings: User defined plugin properties (Maven) -->
 		<!-- https://maven.apache.org/plugins/ -->
-		<maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
 		<maven-clean-plugin.version>3.3.1</maven-clean-plugin.version>
 		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
 		<maven-dependency-plugin.version>3.6.0</maven-dependency-plugin.version>
 		<maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
-		<maven-ear-plugin.version>3.3.0</maven-ear-plugin.version>
 		<maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version>
-		<maven-ejb-plugin.version>3.2.1</maven-ejb-plugin.version>
 		<maven-install-plugin.version>3.0.1</maven-install-plugin.version>
 		<maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
 		<maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
-		<maven-jdeps-plugin.version>3.1.2</maven-jdeps-plugin.version>
 		<maven-project-info-reports-plugin.version>3.4.0</maven-project-info-reports-plugin.version>
 		<maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
-		<maven-shade-plugin.version>3.5.0</maven-shade-plugin.version>
 		<maven-site-plugin.version>3.12.0</maven-site-plugin.version>
 		<maven-source-plugin.version>3.3.0</maven-source-plugin.version>
 		<maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
-		<maven-toolchains-plugin.version>3.1.0</maven-toolchains-plugin.version>
-		<maven-war-plugin.version>3.4.0</maven-war-plugin.version>
 		<!-- Settings: User defined plugin properties (Other) -->
-		<fmt-maven-plugin.version>2.20</fmt-maven-plugin.version>
+		<fmt-maven-plugin.version>2.21.1</fmt-maven-plugin.version>
 		<tidy-maven-plugin.version>1.2.0</tidy-maven-plugin.version>
 		<surefire.printSummary>false</surefire.printSummary>
 		<!-- Settings: User defined dependency properties (main) -->
-		<spring.boot.version>3.1.3</spring.boot.version>
+		<findbugs.jsr305.version>3.0.2</findbugs.jsr305.version>
+		<spring.boot.version>3.2.1</spring.boot.version>
 		<!-- Settings: User defined dependency properties (test) -->
-		<org.junit.5.version>5.9.2</org.junit.5.version>
 	</properties>
 
 	<dependencyManagement>
@@ -63,16 +56,39 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-			<dependency>
-				<groupId>org.junit</groupId>
-				<artifactId>junit-bom</artifactId>
-				<version>${org.junit.5.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${spring.boot.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+			<version>${spring.boot.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>jsr305</artifactId>
+			<version>${findbugs.jsr305.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongodb-driver-sync</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
@@ -154,7 +170,7 @@
 				</executions>
 				<configuration>
 					<compilerArgs>
-						<arg>-Xlint:all,-processing,-cast,-serial,-try</arg>
+						<arg>-Xlint:all,-processing,-cast,-serial,-requires-transitive-automatic</arg>
 					</compilerArgs>
 					<showDeprecation>true</showDeprecation>
 					<showWarnings>true</showWarnings>
@@ -208,14 +224,7 @@
 					<execution>
 						<id>default-test</id>
 						<configuration>
-							<argLine>
-								<!-- main-java packages -->
-								<!--&#45;&#45;add-opens&#32;module/package=ALL-UNNAMED-->
-								<!-- test-java packages -->
-								<!--&#45;&#45;add-opens&#32;module/package=ALL-UNNAMED-->
-								<!-- set time-zone for tests-->
-								-Duser.timezone=UTC
-							</argLine>
+							<argLine>-Duser.timezone=UTC</argLine>
 							<forkCount>1</forkCount>
 							<useSystemClassLoader>false</useSystemClassLoader>
 							<reuseForks>true</reuseForks>
@@ -227,13 +236,6 @@
 						</configuration>
 					</execution>
 				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.junit.jupiter</groupId>
-						<artifactId>junit-jupiter-engine</artifactId>
-						<version>${org.junit.5.version}</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 
 			<plugin>

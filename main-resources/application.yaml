@@ -1,0 +1,11 @@
+server:
+  max-http-request-header-size: 40960
+  shutdown: graceful
+  port: 8080
+
+document-board:
+  host-type: 'mongodb'
+  host: 'localhost:27017'
+  username: ''
+  password: ''
+  options: ''

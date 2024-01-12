@@ -2,8 +2,8 @@
 /_target/
 
 ### Spring ###
-/src/main/resources/application-*.yaml
-/src/test/resources/application-*.yaml
+/main-resources/application-*.yaml
+/test-resources/application-*.yaml
 
 ### STS ###
 .apt_generated
