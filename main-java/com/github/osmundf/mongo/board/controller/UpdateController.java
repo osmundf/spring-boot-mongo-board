@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.osmundf.mongo.board.model.request.FindOneAndUpdateRequest;
 import com.github.osmundf.mongo.board.model.request.UpdateRequest;
 import com.github.osmundf.mongo.board.service.UpdateService;
-import com.mongodb.client.result.UpdateResult;
+import com.github.osmundf.mongo.board.view.result.UpdateResultModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,7 +72,7 @@ public class UpdateController {
    * @return response entity with update result
    */
   @PostMapping("updateOne")
-  public ResponseEntity<UpdateResult> updateOne(@RequestBody String body) {
+  public ResponseEntity<UpdateResultModel> updateOne(@RequestBody String body) {
 
     try {
       final var request = objectMapper.readValue(body, UpdateRequest.class);
@@ -92,7 +92,7 @@ public class UpdateController {
    * @return response entity with update result
    */
   @PostMapping("updateMany")
-  public ResponseEntity<UpdateResult> updateMany(@RequestBody String body) {
+  public ResponseEntity<UpdateResultModel> updateMany(@RequestBody String body) {
 
     try {
       final var request = objectMapper.readValue(body, UpdateRequest.class);

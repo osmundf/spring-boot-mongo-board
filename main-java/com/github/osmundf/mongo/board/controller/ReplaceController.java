@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.osmundf.mongo.board.model.request.FindOneAndReplaceRequest;
 import com.github.osmundf.mongo.board.model.request.ReplaceOneRequest;
 import com.github.osmundf.mongo.board.service.ReplaceService;
-import com.mongodb.client.result.UpdateResult;
+import com.github.osmundf.mongo.board.view.result.UpdateResultModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,7 +72,7 @@ public class ReplaceController {
    * @return response entity with update result
    */
   @PostMapping("replaceOne")
-  public ResponseEntity<UpdateResult> replaceOne(@RequestBody String body) {
+  public ResponseEntity<UpdateResultModel> replaceOne(@RequestBody String body) {
 
     try {
       final var request = objectMapper.readValue(body, ReplaceOneRequest.class);

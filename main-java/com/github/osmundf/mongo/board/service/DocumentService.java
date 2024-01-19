@@ -9,6 +9,8 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.BooleanNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
+import com.github.osmundf.mongo.board.view.result.UpdateResultModel;
+import com.mongodb.client.result.UpdateResult;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -200,6 +202,21 @@ public class DocumentService {
     } catch (JsonProcessingException e) {
       throw new ResponseStatusException(BAD_REQUEST, e.getMessage(), e.getCause());
     }
+  }
+
+  /**
+   * Converts Mongo update result to update result model.
+   *
+   * @param input Mongo update result
+   * @return update result model
+   */
+  public UpdateResultModel toUpdateResult(UpdateResult input) {
+    final var result = new UpdateResultModel();
+    result.setInsertId(toJsonNode(input.getUpsertedId()));
+    result.setAcknowledged(input.wasAcknowledged());
+    result.setMatchedCount(input.getMatchedCount());
+    result.setModifiedCount(input.getModifiedCount());
+    return result;
   }
 
   /**

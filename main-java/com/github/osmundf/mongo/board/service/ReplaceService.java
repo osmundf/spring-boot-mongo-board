@@ -6,10 +6,10 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.osmundf.mongo.board.model.request.FindOneAndReplaceRequest;
 import com.github.osmundf.mongo.board.model.request.ReplaceOneRequest;
+import com.github.osmundf.mongo.board.view.result.UpdateResultModel;
 import com.mongodb.MongoException;
 import com.mongodb.client.model.FindOneAndReplaceOptions;
 import com.mongodb.client.model.ReplaceOptions;
-import com.mongodb.client.result.UpdateResult;
 import org.bson.BsonDocument;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +109,7 @@ public class ReplaceService {
    * @return update result
    */
   @NonNull
-  public UpdateResult replaceOne(@NonNull ReplaceOneRequest request) {
+  public UpdateResultModel replaceOne(@NonNull ReplaceOneRequest request) {
     try {
       final var collection = mongoService.getCollection(request);
       final var filter = documentService.toBson("filter", request.getFilter(), new BsonDocument());
@@ -125,7 +125,8 @@ public class ReplaceService {
         options.let(documentService.toBson("let", request.getLet(), new BsonDocument()));
       }
 
-      return collection.replaceOne(filter, document, options);
+      final var result = collection.replaceOne(filter, document, options);
+      return documentService.toUpdateResult(result);
     }
     // Catch Mongo exceptions.
     catch (MongoException e) {

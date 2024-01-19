@@ -6,6 +6,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.osmundf.mongo.board.model.request.FindOneAndUpdateRequest;
 import com.github.osmundf.mongo.board.model.request.UpdateRequest;
+import com.github.osmundf.mongo.board.view.result.UpdateResultModel;
 import com.mongodb.Function;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
@@ -122,7 +123,7 @@ public class UpdateService {
    * @return update result
    */
   @NonNull
-  public UpdateResult updateOne(@NonNull UpdateRequest request) {
+  public UpdateResultModel updateOne(@NonNull UpdateRequest request) {
     final var updateOrPipeline =
         pipelineService.getUpdateOrPipeline(
             "Update one", request.getUpdate(), request.getPipeline());
@@ -133,7 +134,8 @@ public class UpdateService {
                 (parameters) ->
                     parameters.collection.updateOne(
                         parameters.filter, updateOrPipeline.document(), parameters.options);
-        yield update(request, "one", function);
+        final var result = update(request, "one", function);
+        yield documentService.toUpdateResult(result);
       }
       case UPDATE_WITH_PIPELINE -> {
         final var function =
@@ -141,7 +143,8 @@ public class UpdateService {
                 (parameters) ->
                     parameters.collection.updateOne(
                         parameters.filter, updateOrPipeline.pipeline(), parameters.options);
-        yield update(request, "one", function);
+        final var result = update(request, "one", function);
+        yield documentService.toUpdateResult(result);
       }
     };
   }
@@ -154,7 +157,7 @@ public class UpdateService {
    * @return update result
    */
   @NonNull
-  public UpdateResult updateMany(@NonNull UpdateRequest request) {
+  public UpdateResultModel updateMany(@NonNull UpdateRequest request) {
     final var updateOrPipeline =
         pipelineService.getUpdateOrPipeline(
             "Update many", request.getUpdate(), request.getPipeline());
@@ -165,7 +168,8 @@ public class UpdateService {
                 (parameters) ->
                     parameters.collection.updateMany(
                         parameters.filter, updateOrPipeline.document(), parameters.options);
-        yield update(request, "many", function);
+        final var result = update(request, "many", function);
+        yield documentService.toUpdateResult(result);
       }
       case UPDATE_WITH_PIPELINE -> {
         final var function =
@@ -173,7 +177,8 @@ public class UpdateService {
                 (parameters) ->
                     parameters.collection.updateMany(
                         parameters.filter, updateOrPipeline.pipeline(), parameters.options);
-        yield update(request, "many", function);
+        final var result = update(request, "many", function);
+        yield documentService.toUpdateResult(result);
       }
     };
   }
