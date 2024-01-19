@@ -17,6 +17,12 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Find Service.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @Service
 public class FindService {
 
@@ -26,6 +32,13 @@ public class FindService {
 
   private final CollationService collationService;
 
+  /**
+   * Constructor for Find Service.
+   *
+   * @param mongoService Mongo service
+   * @param documentService document service
+   * @param collationService collation service
+   */
   @Autowired
   public FindService(
       MongoService mongoService,
@@ -36,6 +49,13 @@ public class FindService {
     this.collationService = collationService;
   }
 
+  /**
+   * Perform find operation.
+   *
+   * @param request find many request
+   * @see com.github.osmundf.mongo.board.model.request.FindManyRequest
+   * @return list of object nodes for find operation result
+   */
   @NonNull
   public List<ObjectNode> find(@NonNull FindManyRequest request) {
     try {
@@ -56,6 +76,13 @@ public class FindService {
     }
   }
 
+  /**
+   * Perform find one operation.
+   *
+   * @param request find one request
+   * @see com.github.osmundf.mongo.board.model.request.FindOneRequest
+   * @return object node for result, null otherwise
+   */
   @Nullable
   public ObjectNode findOne(@NonNull FindOneRequest request) {
     try {

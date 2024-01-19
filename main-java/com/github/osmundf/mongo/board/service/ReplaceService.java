@@ -18,6 +18,12 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Replace Service.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @Service
 public class ReplaceService {
 
@@ -29,6 +35,14 @@ public class ReplaceService {
 
   private final CollationService collationService;
 
+  /**
+   * Constructor for Replace Service.
+   *
+   * @param mongoService Mongo service
+   * @param enumService enum service
+   * @param documentService document service
+   * @param collationService collation service
+   */
   @Autowired
   public ReplaceService(
       MongoService mongoService,
@@ -41,6 +55,13 @@ public class ReplaceService {
     this.collationService = collationService;
   }
 
+  /**
+   * Perform find one and replace operation.
+   *
+   * @param request find one and replace request
+   * @see com.github.osmundf.mongo.board.model.request.FindOneAndReplaceRequest
+   * @return object node for result
+   */
   @Nullable
   public ObjectNode findOneAndReplace(@NonNull FindOneAndReplaceRequest request) {
     try {
@@ -80,6 +101,13 @@ public class ReplaceService {
     }
   }
 
+  /**
+   * Perform one replace operation.
+   *
+   * @param request replace one request
+   * @see com.github.osmundf.mongo.board.model.request.ReplaceOneRequest
+   * @return update result
+   */
   @NonNull
   public UpdateResult replaceOne(@NonNull ReplaceOneRequest request) {
     try {

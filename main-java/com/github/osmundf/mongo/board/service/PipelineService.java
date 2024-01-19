@@ -15,16 +15,35 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Pipeline Service.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @Service
 public class PipelineService {
 
   private final DocumentService documentService;
 
+  /**
+   * Constructor for Pipeline Service.
+   *
+   * @param documentService document service
+   */
   @Autowired
   public PipelineService(DocumentService documentService) {
     this.documentService = documentService;
   }
 
+  /**
+   * Return update or pipeline for given parameters.
+   *
+   * @param operation operation name
+   * @param document object node for document
+   * @param list list of object nodes for pipeline
+   * @return an update or pipeline object
+   */
   @NonNull
   public UpdateOrPipeline getUpdateOrPipeline(
       @NonNull String operation, @Nullable ObjectNode document, @Nullable List<ObjectNode> list) {

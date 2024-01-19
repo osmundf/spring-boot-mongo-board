@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Replace Controller.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @RestController
 @RequestMapping("/")
 public class ReplaceController {
@@ -25,12 +31,25 @@ public class ReplaceController {
 
   private final ReplaceService replaceService;
 
+  /**
+   * Constructor for Replace Controller.
+   *
+   * @param objectMapper object mapper
+   * @param replaceService replace service
+   */
   @Autowired
   public ReplaceController(ObjectMapper objectMapper, ReplaceService replaceService) {
     this.objectMapper = objectMapper;
     this.replaceService = replaceService;
   }
 
+  /**
+   * Perform find one and replace operation.
+   *
+   * @param body body for find one and replace request
+   * @see com.github.osmundf.mongo.board.model.request.FindOneAndReplaceRequest
+   * @return response entity with result, no content otherwise
+   */
   @PostMapping("findOneAndReplace")
   public ResponseEntity<ObjectNode> findOneAndReplace(@RequestBody String body) {
 
@@ -45,6 +64,13 @@ public class ReplaceController {
     }
   }
 
+  /**
+   * Perform replace one operation.
+   *
+   * @param body body for replace one request
+   * @see com.github.osmundf.mongo.board.model.request.ReplaceOneRequest
+   * @return response entity with update result
+   */
   @PostMapping("replaceOne")
   public ResponseEntity<UpdateResult> replaceOne(@RequestBody String body) {
 

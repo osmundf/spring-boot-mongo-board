@@ -22,6 +22,12 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Delete Service.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @Service
 public class DeleteService {
 
@@ -31,6 +37,13 @@ public class DeleteService {
 
   private final CollationService collationService;
 
+  /**
+   * Constructor for Delete Service.
+   *
+   * @param mongoService Mongo service
+   * @param documentService document service
+   * @param collationService collation service
+   */
   @Autowired
   public DeleteService(
       MongoService mongoService,
@@ -41,6 +54,13 @@ public class DeleteService {
     this.collationService = collationService;
   }
 
+  /**
+   * Perform find one and delete operation.
+   *
+   * @param request find on and delete request
+   * @see com.github.osmundf.mongo.board.model.request.FindOneAndDeleteRequest
+   * @return find one and delete result, null otherwise
+   */
   @Nullable
   public ObjectNode findOneAndDelete(@NonNull FindOneAndDeleteRequest request) {
     try {
@@ -71,6 +91,13 @@ public class DeleteService {
     }
   }
 
+  /**
+   * Perform delete one operation.
+   *
+   * @param request delete request
+   * @see com.github.osmundf.mongo.board.model.request.DeleteRequest
+   * @return delete result
+   */
   public DeleteResultModel deleteOne(DeleteRequest request) {
 
     return delete(
@@ -78,6 +105,12 @@ public class DeleteService {
         parameters -> parameters.collection.deleteOne(parameters.filter, parameters.options));
   }
 
+  /**
+   * Perform delete many operation.
+   *
+   * @param request delete request
+   * @return delete result
+   */
   public DeleteResultModel deleteMany(DeleteRequest request) {
 
     return delete(

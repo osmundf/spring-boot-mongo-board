@@ -12,6 +12,12 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Aggregate Service.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @Service
 public class AggregateService {
 
@@ -19,12 +25,24 @@ public class AggregateService {
 
   private final DocumentService documentService;
 
+  /**
+   * Constructor for Aggregate Service.
+   *
+   * @param mongoService Mongo service
+   * @param documentService document service
+   */
   @Autowired
   public AggregateService(MongoService mongoService, DocumentService documentService) {
     this.mongoService = mongoService;
     this.documentService = documentService;
   }
 
+  /**
+   * Returns list of object nodes for aggregation request.
+   *
+   * @param request aggregate request
+   * @return list of object nodes for aggregation request
+   */
   @NonNull
   public List<ObjectNode> aggregate(@NonNull AggregateRequest request) {
     try {

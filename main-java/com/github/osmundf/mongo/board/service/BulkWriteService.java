@@ -35,6 +35,12 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Bulk Write Service.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @Service
 public class BulkWriteService {
 
@@ -48,6 +54,15 @@ public class BulkWriteService {
 
   private final CollationService collationService;
 
+  /**
+   * Constructor for Bulk Write Service.
+   *
+   * @param mongoService Mongo service
+   * @param documentService document service
+   * @param bulkDocumentService bulk document service
+   * @param pipelineService pipeline service
+   * @param collationService collation service
+   */
   @Autowired
   public BulkWriteService(
       MongoService mongoService,
@@ -62,6 +77,12 @@ public class BulkWriteService {
     this.collationService = collationService;
   }
 
+  /**
+   * Return bulk write result mode for given bulk write request.
+   *
+   * @param request bulk write request
+   * @return bulk write result
+   */
   public BulkWriteResultModel bulkWrite(BulkWriteRequest request) {
     try {
       final var collection = mongoService.getCollection(request);

@@ -17,9 +17,21 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Enum Service.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @Service
 public class EnumService {
 
+  /**
+   * Provide return document enum for return document value.
+   *
+   * @param value return document value
+   * @return return document enum
+   */
   @NonNull
   public ReturnDocument getReturnDocument(@Nullable String value) {
     if (value == null) {
@@ -34,6 +46,14 @@ public class EnumService {
     };
   }
 
+  /**
+   * Provide read preference for given parameters.
+   *
+   * @param value read preference value
+   * @param tagSets read preference tag sets
+   * @param maxStaleness max staleness duration in milliseconds
+   * @return read preference
+   */
   @NonNull
   public ReadPreference getReadPreference(
       @NonNull String value,
@@ -61,6 +81,12 @@ public class EnumService {
     return preference;
   }
 
+  /**
+   * Provide read concern enum for read concern value.
+   *
+   * @param value read concern value
+   * @return read concern enum
+   */
   @NonNull
   public ReadConcern getReadConcern(@NonNull String value) {
     return switch (value) {
@@ -75,6 +101,12 @@ public class EnumService {
     };
   }
 
+  /**
+   * Provide write concern enum for write concern value.
+   *
+   * @param value write concern value
+   * @return write concern enum
+   */
   @NonNull
   public WriteConcern getWriteConcern(@NonNull String value) {
     return switch (value) {

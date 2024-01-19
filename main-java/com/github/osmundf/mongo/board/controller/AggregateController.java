@@ -16,7 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-/** Aggregate Controller. */
+/**
+ * Aggregate Controller.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @RestController
 @RequestMapping("/")
 public class AggregateController {
@@ -38,13 +43,15 @@ public class AggregateController {
   }
 
   /**
-   * Aggregation end point.
+   * Perform aggregate operation.
    *
-   * @param body aggregation model
+   * @param body body for aggregate request model
+   * @see com.github.osmundf.mongo.board.model.request.AggregateRequest
    * @return response entity with the list of aggregation pipeline results
    */
   @PostMapping("aggregate")
   public ResponseEntity<List<ObjectNode>> aggregate(@RequestBody String body) {
+
     try {
       final var request = objectMapper.readValue(body, AggregateRequest.class);
       return ResponseEntity.ok(aggregateService.aggregate(request));

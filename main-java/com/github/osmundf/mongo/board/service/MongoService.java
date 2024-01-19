@@ -15,6 +15,12 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Mongo Service.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @Service
 public class MongoService {
 
@@ -22,12 +28,25 @@ public class MongoService {
 
   private final EnumService enumService;
 
+  /**
+   * Constructor for Mongo Service.
+   *
+   * @param properties document board properties
+   * @param enumService enum service
+   */
   @Autowired
   public MongoService(final DocumentBoardProperties properties, EnumService enumService) {
     mongoClient = MongoClients.create(connectionString(properties));
     this.enumService = enumService;
   }
 
+  /**
+   * Return Mongo database for database request.
+   *
+   * @param request database request
+   * @see com.github.osmundf.mongo.board.model.request.DatabaseRequest
+   * @return Mongo database object
+   */
   @NonNull
   public MongoDatabase getDatabase(@Nullable DatabaseRequest request) {
 
@@ -74,6 +93,13 @@ public class MongoService {
     return database;
   }
 
+  /**
+   * Return Mongo collection for collection request.
+   *
+   * @param request collection request
+   * @see com.github.osmundf.mongo.board.model.request.CollectionRequest
+   * @return Mongo collection object
+   */
   @NonNull
   public MongoCollection<Document> getCollection(@Nullable CollectionRequest request) {
 

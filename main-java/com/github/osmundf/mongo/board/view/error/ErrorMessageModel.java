@@ -58,26 +58,56 @@ public class ErrorMessageModel implements Serializable {
     this.cause = cause;
   }
 
+  /**
+   * Getter for date-time.
+   *
+   * @return offset date-time
+   */
   public OffsetDateTime getDateTime() {
     return dateTime;
   }
 
+  /**
+   * Getter for code.
+   *
+   * @return HTTP status code integer value
+   */
   public int getCode() {
     return code;
   }
 
+  /**
+   * Getter for error.
+   *
+   * @return HTTP status code for error
+   */
   public HttpStatusCode getError() {
     return error;
   }
 
+  /**
+   * Getter for path.
+   *
+   * @return path
+   */
   public String getPath() {
     return path;
   }
 
+  /**
+   * Getter for message.
+   *
+   * @return message
+   */
   public String getMessage() {
     return message;
   }
 
+  /**
+   * Getter for cause.
+   *
+   * @return cause
+   */
   public String getCause() {
     return cause;
   }

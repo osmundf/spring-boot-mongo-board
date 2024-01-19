@@ -29,6 +29,12 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Document Service.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @Service
 public class DocumentService {
 
@@ -38,11 +44,22 @@ public class DocumentService {
 
   private final DecoderContext decoderContext = DecoderContext.builder().build();
 
+  /**
+   * Constructor for Document Service.
+   *
+   * @param objectMapper object mapper
+   */
   @Autowired
   public DocumentService(final ObjectMapper objectMapper) {
     this.objectMapper = objectMapper;
   }
 
+  /**
+   * Returns if the list contains items that are null.
+   *
+   * @param list list
+   * @return true if the list contains items that are null, false otherwise
+   */
   public boolean containsNulls(@NonNull List<?> list) {
     for (var item : list) {
       if (item == null) {
@@ -52,6 +69,14 @@ public class DocumentService {
     return false;
   }
 
+  /**
+   * Convert object node to BSON document.
+   *
+   * @param type type
+   * @param objectNode object node
+   * @param defaultValue default value
+   * @return BSON document, default value otherwise
+   */
   @NonNull
   public BsonDocument toBson(
       @NonNull String type, @Nullable ObjectNode objectNode, @NonNull BsonDocument defaultValue) {
@@ -59,6 +84,13 @@ public class DocumentService {
     return result != null ? result : defaultValue;
   }
 
+  /**
+   * Convert object node to BSON document.
+   *
+   * @param type type
+   * @param objectNode object node
+   * @return BSON document, null otherwise
+   */
   @Nullable
   public BsonDocument toBson(@NonNull String type, @Nullable ObjectNode objectNode) {
     if (objectNode == null) {
@@ -67,6 +99,13 @@ public class DocumentService {
     return parseBson(type, objectNode.toString());
   }
 
+  /**
+   * Converts a list of object nodes to a list of BSON documents.
+   *
+   * @param type type
+   * @param input list of object node
+   * @return a list of BSON documents, null otherwise
+   */
   @Nullable
   public List<BsonDocument> toBsons(@NonNull String type, @Nullable List<ObjectNode> input) {
     if (input == null) {
@@ -79,11 +118,25 @@ public class DocumentService {
     return list;
   }
 
+  /**
+   * Converts a BSON document to a document.
+   *
+   * @param bsonDocument BSON document
+   * @return document
+   */
   @NonNull
   public Document toDocument(@NonNull BsonDocument bsonDocument) {
     return codec.decode(bsonDocument.asBsonReader(), decoderContext);
   }
 
+  /**
+   * Converts an object node to a document.
+   *
+   * @param type type
+   * @param input object node
+   * @param defaultValue default value
+   * @return object node converted to a document, default value otherwise
+   */
   @NonNull
   public Document toDocument(
       @NonNull String type, @Nullable ObjectNode input, @NonNull Document defaultValue) {
@@ -91,6 +144,13 @@ public class DocumentService {
     return result != null ? result : defaultValue;
   }
 
+  /**
+   * Converts an object node to a document.
+   *
+   * @param type type
+   * @param input object node
+   * @return object node converted to a document, null otherwise
+   */
   @Nullable
   public Document toDocument(@NonNull String type, @Nullable ObjectNode input) {
     if (input == null) {
@@ -104,6 +164,13 @@ public class DocumentService {
     }
   }
 
+  /**
+   * Converts a list of object nodes to a list of documents.
+   *
+   * @param type type
+   * @param input list of object nodes
+   * @return list of documents, null otherwise
+   */
   @Nullable
   public List<Document> toDocuments(@NonNull String type, @Nullable List<ObjectNode> input) {
     if (input == null) {
@@ -117,6 +184,12 @@ public class DocumentService {
     return list;
   }
 
+  /**
+   * Converts a document to an object node.
+   *
+   * @param document document
+   * @return document converted to an object node, null otherwise
+   */
   @Nullable
   public ObjectNode toObjectNode(@Nullable Document document) {
     if (document == null) {
@@ -129,6 +202,12 @@ public class DocumentService {
     }
   }
 
+  /**
+   * Converts a BSON value to a JSON node.
+   *
+   * @param bsonValue BSON value
+   * @return BSON value converted to a JSON node, null otherwise
+   */
   @Nullable
   public JsonNode toJsonNode(@Nullable BsonValue bsonValue) {
     if (bsonValue == null) {

@@ -18,6 +18,12 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Insert Service.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @Service
 public class InsertService {
 
@@ -25,12 +31,25 @@ public class InsertService {
 
   private final DocumentService documentService;
 
+  /**
+   * Constructor for Insert Service.
+   *
+   * @param mongoService Mongo service
+   * @param documentService document service
+   */
   @Autowired
   public InsertService(MongoService mongoService, DocumentService documentService) {
     this.mongoService = mongoService;
     this.documentService = documentService;
   }
 
+  /**
+   * Perform insert one operation.
+   *
+   * @param request insert one request
+   * @see com.github.osmundf.mongo.board.model.request.InsertOneRequest
+   * @return insert one result
+   */
   @NonNull
   public InsertOneResultModel insertOne(@NonNull InsertOneRequest request) {
     try {
@@ -51,6 +70,13 @@ public class InsertService {
     }
   }
 
+  /**
+   * Perform insert many operation.
+   *
+   * @param request insert many request
+   * @see com.github.osmundf.mongo.board.model.request.InsertManyRequest
+   * @return insert many result
+   */
   @NonNull
   public InsertManyResultModel insertMany(@NonNull InsertManyRequest request) {
     try {

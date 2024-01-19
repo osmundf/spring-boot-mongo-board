@@ -19,6 +19,12 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Index Service.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @Service
 public class IndexService {
 
@@ -28,6 +34,13 @@ public class IndexService {
 
   private final CollationService collationService;
 
+  /**
+   * Constructor for Index Service.
+   *
+   * @param mongoService Mongo service
+   * @param documentService document service
+   * @param collationService collation service
+   */
   @Autowired
   public IndexService(
       MongoService mongoService,
@@ -38,6 +51,13 @@ public class IndexService {
     this.collationService = collationService;
   }
 
+  /**
+   * Perform list indexes operation.
+   *
+   * @param request collection request
+   * @see com.github.osmundf.mongo.board.model.request.CollectionRequest
+   * @return a list of indexes, an empty list otherwise
+   */
   @NonNull
   public List<ObjectNode> listIndexes(@NonNull CollectionRequest request) {
 
@@ -53,6 +73,13 @@ public class IndexService {
     }
   }
 
+  /**
+   * Perform create index operation.
+   *
+   * @param request create index request
+   * @see com.github.osmundf.mongo.board.model.request.CreateIndexRequest
+   * @return create index result
+   */
   @NonNull
   public String createIndex(@NonNull CreateIndexRequest request) {
     try {
@@ -76,6 +103,12 @@ public class IndexService {
     }
   }
 
+  /**
+   * Perform drop index operation.
+   *
+   * @param request drop index request
+   * @return void
+   */
   @Nullable
   public Void dropIndex(@NonNull DropIndexRequest request) {
     try {

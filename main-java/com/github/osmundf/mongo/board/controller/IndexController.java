@@ -18,6 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Index Controller.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @RestController
 @RequestMapping("/")
 public class IndexController {
@@ -26,12 +32,24 @@ public class IndexController {
 
   private final IndexService indexService;
 
+  /**
+   * Constructor for Index Controller.
+   *
+   * @param objectMapper object mapper
+   * @param indexService index service
+   */
   @Autowired
   public IndexController(ObjectMapper objectMapper, IndexService indexService) {
     this.objectMapper = objectMapper;
     this.indexService = indexService;
   }
 
+  /**
+   * Perform index list operation.
+   *
+   * @param body body for collection request
+   * @return response entity with list of index objects
+   */
   @PostMapping("listIndexes")
   public ResponseEntity<List<ObjectNode>> listIndexes(@RequestBody String body) {
 
@@ -45,6 +63,13 @@ public class IndexController {
     }
   }
 
+  /**
+   * Perform create index operation.
+   *
+   * @param body body for create index request
+   * @see com.github.osmundf.mongo.board.model.request.CreateIndexRequest
+   * @return response entity with create index result
+   */
   @PostMapping("createIndex")
   public ResponseEntity<String> createIndex(@RequestBody String body) {
 
@@ -58,6 +83,13 @@ public class IndexController {
     }
   }
 
+  /**
+   * Perform drop index operation.
+   *
+   * @param body body for drop index request
+   * @see com.github.osmundf.mongo.board.model.request.DropIndexRequest
+   * @return response entity without a body
+   */
   @PostMapping("dropIndex")
   public ResponseEntity<Void> dropIndex(@RequestBody String body) {
 

@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Update Controller.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @RestController
 @RequestMapping("/")
 public class UpdateController {
@@ -25,12 +31,25 @@ public class UpdateController {
 
   private final UpdateService updateService;
 
+  /**
+   * Constructor for Update Controller.
+   *
+   * @param objectMapper object mapper
+   * @param updateService update service
+   */
   @Autowired
   public UpdateController(ObjectMapper objectMapper, UpdateService updateService) {
     this.objectMapper = objectMapper;
     this.updateService = updateService;
   }
 
+  /**
+   * Perform find one and update operation.
+   *
+   * @param body body for find one and update request
+   * @see com.github.osmundf.mongo.board.model.request.FindOneAndUpdateRequest
+   * @return response entity with result, no content otherwise
+   */
   @PostMapping("findOneAndUpdate")
   public ResponseEntity<ObjectNode> findOneAndUpdate(@RequestBody String body) {
 
@@ -45,6 +64,13 @@ public class UpdateController {
     }
   }
 
+  /**
+   * Perform update one operation.
+   *
+   * @param body body for update request
+   * @see com.github.osmundf.mongo.board.model.request.UpdateRequest
+   * @return response entity with update result
+   */
   @PostMapping("updateOne")
   public ResponseEntity<UpdateResult> updateOne(@RequestBody String body) {
 
@@ -58,6 +84,13 @@ public class UpdateController {
     }
   }
 
+  /**
+   * Perform update many operation.
+   *
+   * @param body body for update request
+   * @see com.github.osmundf.mongo.board.model.request.UpdateRequest
+   * @return response entity with update result
+   */
   @PostMapping("updateMany")
   public ResponseEntity<UpdateResult> updateMany(@RequestBody String body) {
 

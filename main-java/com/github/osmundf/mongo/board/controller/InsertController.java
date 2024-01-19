@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Insert Controller.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @RestController
 @RequestMapping("/")
 public class InsertController {
@@ -25,12 +31,25 @@ public class InsertController {
 
   private final InsertService insertService;
 
+  /**
+   * Constructor for Insert Controller.
+   *
+   * @param objectMapper object mapper
+   * @param insertService insert service
+   */
   @Autowired
   public InsertController(ObjectMapper objectMapper, InsertService insertService) {
     this.objectMapper = objectMapper;
     this.insertService = insertService;
   }
 
+  /**
+   * Perform insert one operation.
+   *
+   * @param body body for insert one request
+   * @see com.github.osmundf.mongo.board.model.request.InsertOneRequest
+   * @return response entity with insert one result
+   */
   @PostMapping("insertOne")
   public ResponseEntity<InsertOneResultModel> insertOne(@RequestBody String body) {
 
@@ -44,6 +63,13 @@ public class InsertController {
     }
   }
 
+  /**
+   * Perform insert many operation.
+   *
+   * @param body body for insert many request
+   * @see com.github.osmundf.mongo.board.model.request.InsertManyRequest
+   * @return response entity with insert many result
+   */
   @PostMapping("insertMany")
   public ResponseEntity<InsertManyResultModel> insertMany(@RequestBody String body) {
 

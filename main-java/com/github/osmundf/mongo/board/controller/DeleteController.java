@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Delete Controller.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @RestController
 @RequestMapping("/")
 public class DeleteController {
@@ -25,12 +31,25 @@ public class DeleteController {
 
   private final DeleteService deleteService;
 
+  /**
+   * Constructor for Delete Controller.
+   *
+   * @param objectMapper object mapper
+   * @param deleteService delete service
+   */
   @Autowired
   public DeleteController(ObjectMapper objectMapper, DeleteService deleteService) {
     this.objectMapper = objectMapper;
     this.deleteService = deleteService;
   }
 
+  /**
+   * Perform find one and delete operation.
+   *
+   * @param body body for find one and delete request
+   * @see com.github.osmundf.mongo.board.model.request.FindOneAndDeleteRequest
+   * @return response entity with result, no content response entity otherwise
+   */
   @PostMapping("findOneAndDelete")
   public ResponseEntity<ObjectNode> findOneAndDelete(@RequestBody String body) {
 
@@ -45,6 +64,13 @@ public class DeleteController {
     }
   }
 
+  /**
+   * Perform delete one operation.
+   *
+   * @param body body for delete request
+   * @see com.github.osmundf.mongo.board.model.request.DeleteRequest
+   * @return response entity with delete result
+   */
   @PostMapping("deleteOne")
   public ResponseEntity<DeleteResultModel> deleteOne(@RequestBody String body) {
 
@@ -58,6 +84,13 @@ public class DeleteController {
     }
   }
 
+  /**
+   * Perform delete many operation.
+   *
+   * @param body body with delete request
+   * @see com.github.osmundf.mongo.board.model.request.DeleteRequest
+   * @return response entity with delete result
+   */
   @PostMapping("deleteMany")
   public ResponseEntity<DeleteResultModel> deleteMany(@RequestBody String body) {
 

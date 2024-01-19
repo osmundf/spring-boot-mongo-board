@@ -8,6 +8,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
+/**
+ * Application.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @SpringBootApplication
 @EnableConfigurationProperties({DocumentBoardProperties.class})
 public class Application {

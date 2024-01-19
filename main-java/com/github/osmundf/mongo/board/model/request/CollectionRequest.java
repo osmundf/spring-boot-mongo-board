@@ -2,6 +2,12 @@ package com.github.osmundf.mongo.board.model.request;
 
 import org.springframework.lang.Nullable;
 
+/**
+ * Collection Request.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 public class CollectionRequest extends DatabaseRequest {
 
   private String collection;

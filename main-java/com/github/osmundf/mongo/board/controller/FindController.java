@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Find Controller.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @RestController
 @RequestMapping("/")
 public class FindController {
@@ -25,6 +31,12 @@ public class FindController {
 
   private final FindService findService;
 
+  /**
+   * Constructor for Find Controller.
+   *
+   * @param objectMapper object mapper
+   * @param findService find service
+   */
   @Autowired
   public FindController(ObjectMapper objectMapper, FindService findService) {
     this.objectMapper = objectMapper;
@@ -34,7 +46,7 @@ public class FindController {
   /**
    * Return list of matching documents.
    *
-   * @param body find many request
+   * @param body body for find many request
    * @see com.github.osmundf.mongo.board.model.request.FindManyRequest
    * @return list of matching documents, empty list otherwise.
    */
@@ -54,9 +66,9 @@ public class FindController {
   /**
    * Return first matching document.
    *
-   * @param body find one request
+   * @param body body for find one request
    * @see com.github.osmundf.mongo.board.model.request.FindOneRequest
-   * @return first matching document, no content otherwise.
+   * @return response entity with first matching document, no content otherwise.
    */
   @PostMapping("findOne")
   public ResponseEntity<ObjectNode> findOne(@RequestBody String body) {

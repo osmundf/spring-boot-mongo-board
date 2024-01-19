@@ -21,6 +21,12 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Update Service.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @Service
 public class UpdateService {
 
@@ -34,6 +40,15 @@ public class UpdateService {
 
   private final CollationService collationService;
 
+  /**
+   * Constructor for Update Service.
+   *
+   * @param mongoService Mongo service
+   * @param enumService enum service
+   * @param documentService document service
+   * @param pipelineService pipeline service
+   * @param collationService collation service
+   */
   @Autowired
   public UpdateService(
       MongoService mongoService,
@@ -48,6 +63,13 @@ public class UpdateService {
     this.collationService = collationService;
   }
 
+  /**
+   * Perform find one and update operation.
+   *
+   * @param request find one and update request
+   * @see com.github.osmundf.mongo.board.model.request.FindOneAndUpdateRequest
+   * @return object node for result
+   */
   @Nullable
   public ObjectNode findOneAndUpdate(@NonNull FindOneAndUpdateRequest request) {
     try {
@@ -92,6 +114,13 @@ public class UpdateService {
     }
   }
 
+  /**
+   * Perform update one.
+   *
+   * @param request update request
+   * @see com.github.osmundf.mongo.board.model.request.UpdateRequest
+   * @return update result
+   */
   @NonNull
   public UpdateResult updateOne(@NonNull UpdateRequest request) {
     final var updateOrPipeline =
@@ -117,6 +146,13 @@ public class UpdateService {
     };
   }
 
+  /**
+   * Perform update many operation.
+   *
+   * @param request update request
+   * @see com.github.osmundf.mongo.board.model.request.UpdateRequest
+   * @return update result
+   */
   @NonNull
   public UpdateResult updateMany(@NonNull UpdateRequest request) {
     final var updateOrPipeline =

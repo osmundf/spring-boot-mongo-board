@@ -15,6 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+/**
+ * Bulk Write Controller.
+ *
+ * @author osmundf
+ * @version $Id: $Id
+ */
 @RestController
 @RequestMapping("/")
 public class BulkWriteController {
@@ -23,12 +29,25 @@ public class BulkWriteController {
 
   private final BulkWriteService bulkWriteService;
 
+  /**
+   * Constructor for Bulk Write Controller.
+   *
+   * @param objectMapper object mapper
+   * @param bulkWriteService bulk write service
+   */
   @Autowired
   public BulkWriteController(ObjectMapper objectMapper, BulkWriteService bulkWriteService) {
     this.objectMapper = objectMapper;
     this.bulkWriteService = bulkWriteService;
   }
 
+  /**
+   * Perform bulk write operation.
+   *
+   * @param body body for bulk write request
+   * @see com.github.osmundf.mongo.board.model.bulk.BulkWriteRequest
+   * @return response entity with bulk write result
+   */
   @PostMapping("bulkWrite")
   public ResponseEntity<BulkWriteResultModel> bulkWrite(@RequestBody String body) {
 
