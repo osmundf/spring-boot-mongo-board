@@ -43,7 +43,7 @@
 		<surefire.printSummary>false</surefire.printSummary>
 		<!-- Settings: User defined dependency properties (main) -->
 		<findbugs.jsr305.version>3.0.2</findbugs.jsr305.version>
-		<spring.boot.version>3.2.1</spring.boot.version>
+		<spring.boot.version>3.2.3</spring.boot.version>
 		<!-- Settings: User defined dependency properties (test) -->
 	</properties>
 
