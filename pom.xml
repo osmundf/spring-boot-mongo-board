@@ -171,6 +171,7 @@
 				<configuration>
 					<compilerArgs>
 						<arg>-Xlint:all,-processing,-cast,-serial,-requires-transitive-automatic</arg>
+						<arg>-parameters</arg>
 					</compilerArgs>
 					<showDeprecation>true</showDeprecation>
 					<showWarnings>true</showWarnings>
